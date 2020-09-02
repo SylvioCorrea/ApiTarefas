@@ -9,14 +9,14 @@ using Aplicacao.Modelos;
 
 namespace ApiTarefas.Controllers
 {
-    [Route("[controller]")]
+    [Route("clientes")]
     [ApiController]
-    public class ClientesController : ControllerBase
+    public class TarefasController : ControllerBase
     {
 
         private ITarefasServico _tarefasServico;
 
-        public ClientesController(ITarefasServico tarefasServico)
+        public TarefasController(ITarefasServico tarefasServico)
         {
             _tarefasServico = tarefasServico;
         }

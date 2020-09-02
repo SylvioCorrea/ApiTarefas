@@ -50,7 +50,7 @@ namespace ApiTarefas
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Tarefas ");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Tarefas");
             });
 
             app.UseHttpsRedirection();
