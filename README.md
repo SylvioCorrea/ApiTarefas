@@ -9,3 +9,4 @@ Atende às seguintes requisições:
  - /clientes/\<id\>: GET - retorna o cliente cadastrado com a id.
  - /clientes/\<id\>/tarefas: GET - retorna id e nome do cliente junto com uma lista de todas as tarefas cadastradas para o mesmo.
  - /clientes/\<id\>/tarefas: POST - cadastra uma tarefa com a informação `descricao` contida no corpo da requisição.
+ - /clientes/relatorio: GET - retorna a lista de todos os clientes com suas respectivas tarefas.

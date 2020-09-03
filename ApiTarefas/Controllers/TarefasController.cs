@@ -15,22 +15,26 @@ namespace ApiTarefas.Controllers
     {
 
         private ITarefasServico _tarefasServico;
+        private IClientesServico _clientesServico;
+        private IRelatorioServico _relatorioServico;
 
-        public TarefasController(ITarefasServico tarefasServico)
+        public TarefasController(ITarefasServico tarefasServico, IClientesServico clientesServico, IRelatorioServico relatorioServico)
         {
             _tarefasServico = tarefasServico;
+            _clientesServico = clientesServico;
+            _relatorioServico = relatorioServico;
         }
 
         [HttpGet]
         public async Task<IEnumerable<ClienteModel>> GetClientes()
         {
-            return await _tarefasServico.GetClientes();
+            return await _clientesServico.GetClientes();
         }
 
         [HttpGet("{id}")]
         public async Task<ClienteModel> GetCliente(int id)
         {
-            return await _tarefasServico.GetCliente(id);
+            return await _clientesServico.GetCliente(id);
         }
 
         [HttpGet("{id}/tarefas")]
@@ -42,14 +46,28 @@ namespace ApiTarefas.Controllers
         [HttpPost]
         public async Task<int> PostCliente(ClienteModel cliente)
         {
-            return await _tarefasServico.CreateCliente(cliente);
+            return await _clientesServico.CreateCliente(cliente);
         }
 
         [HttpPost("{id}/tarefas")]
-        public async Task<int> PostTarefa(int id, TarefaModel tarefa)
+        public async Task<IActionResult> PostTarefa(int id, TarefaModel tarefa)
         {
             tarefa.IdCliente = id;
-            return await _tarefasServico.CreateTarefa(tarefa);
+            int linhasModificadas = await _tarefasServico.CreateTarefa(tarefa);
+            if (linhasModificadas > 0)
+            {
+                return Ok(linhasModificadas);
+            }
+            else
+            {
+                return BadRequest(new { mensagem = "A tarefa não pode ser inserida" });
+            }
+        }
+
+        [HttpGet("relatorio")]
+        public async Task<IEnumerable<ClienteTarefasModel>> GetRelatorio()
+        {
+            return await _relatorioServico.GetRelatorio();
         }
     }
 }

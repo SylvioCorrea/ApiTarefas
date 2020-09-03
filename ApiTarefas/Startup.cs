@@ -33,9 +33,12 @@ namespace ApiTarefas
             services.AddSwaggerGen();
 
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddScoped<IClientesServico, ClientesServico>();
             services.AddScoped<ITarefasServico, TarefasServico>();
+            services.AddScoped<IRelatorioServico, RelatorioServico>();
             services.AddScoped<IClientesRepositorio, ClientesRepositorio>();
             services.AddScoped<ITarefasRepositorio, TarefasRepositorio>();
+            services.AddScoped<IRelatorioRepositorio, RelatorioRepositorio>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
