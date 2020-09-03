@@ -41,8 +41,7 @@ namespace Infraestrutura
                         }
                         if(t != null) clienteTarefas.Tarefas.Add(t);
                         return 1;
-                    },
-                    splitOn: "id"
+                    }
                 );
 
                 return dict.Values;
