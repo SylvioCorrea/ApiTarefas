@@ -9,6 +9,6 @@ namespace Infraestrutura
 {
     public interface IRelatorioRepositorio
     {
-        Task<IEnumerable<ClienteTarefas>> SelectRelatorio();
+        Task<Relatorio> SelectRelatorio();
     }
 }

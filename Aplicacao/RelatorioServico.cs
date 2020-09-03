@@ -6,6 +6,7 @@ using System.Linq;
 
 using Infraestrutura;
 using Dominio;
+using Aplicacao.Modelos;
 
 namespace Aplicacao
 {
@@ -18,10 +19,10 @@ namespace Aplicacao
             _relatorioRepositorio = relatorioRepositorio;
         }
 
-        public async Task<IEnumerable<ClienteTarefasModel>> GetRelatorio()
+        public async Task<RelatorioModel> GetRelatorio()
         {
-            var lista = await _relatorioRepositorio.SelectRelatorio();
-            return lista.Select(ct => new ClienteTarefasModel { Id = ct.Id, Nome = ct.Nome, Tarefas = ct.Tarefas });
+            var relatorio = await _relatorioRepositorio.SelectRelatorio();
+            return new RelatorioModel { ListaClientesTarefas = relatorio.ListaClientesTarefas };
         }
     }
 }

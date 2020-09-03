@@ -6,8 +6,7 @@ namespace Dominio
 {
     public class ClienteTarefas
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public Cliente Cliente { get; set; }
         public IList<Tarefa> Tarefas { get; set; }
     }
 }

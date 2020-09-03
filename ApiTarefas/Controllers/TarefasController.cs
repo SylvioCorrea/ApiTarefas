@@ -65,7 +65,7 @@ namespace ApiTarefas.Controllers
         }
 
         [HttpGet("relatorio")]
-        public async Task<IEnumerable<ClienteTarefasModel>> GetRelatorio()
+        public async Task<RelatorioModel> GetRelatorio()
         {
             return await _relatorioServico.GetRelatorio();
         }

@@ -57,8 +57,7 @@ namespace Infraestrutura
                 );
                 return new ClienteTarefas
                 {
-                    Id = cliente.Id,
-                    Nome = cliente.Nome,
+                    Cliente = cliente,
                     /*Se um objeto tarefa foi inicializado com id 0 é porque o
                      retorno do banco foi nulo (Não há tarefa com id 0 no banco)*/
                     Tarefas = tarefas.Where(t => t != null).ToList()

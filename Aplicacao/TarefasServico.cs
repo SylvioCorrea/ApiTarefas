@@ -26,8 +26,8 @@ namespace Aplicacao
             ClienteTarefas ct = await _tarefasRepositorio.SelectClienteTarefas(idCliente);
             return new ClienteTarefasModel
             {
-                Id = ct.Id,
-                Nome = ct.Nome,
+                Id = ct.Cliente.Id,
+                Nome = ct.Cliente.Nome,
                 Tarefas = ct.Tarefas
             };
         }

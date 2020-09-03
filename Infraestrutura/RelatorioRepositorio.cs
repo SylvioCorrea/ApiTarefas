@@ -18,7 +18,7 @@ namespace Infraestrutura
 
         }
 
-        public async Task<IEnumerable<ClienteTarefas>> SelectRelatorio()
+        public async Task<Relatorio> SelectRelatorio()
         {
             
             using (SqlConnection con = GetConnection())
@@ -36,7 +36,7 @@ namespace Infraestrutura
                         ClienteTarefas clienteTarefas;
                         if (!dict.TryGetValue(c.Id, out clienteTarefas))
                         {
-                            clienteTarefas = new ClienteTarefas { Id=c.Id, Nome=c.Nome, Tarefas = new List<Tarefa>()};
+                            clienteTarefas = new ClienteTarefas { Cliente = c, Tarefas = new List<Tarefa>()};
                             dict.Add(c.Id, clienteTarefas);
                         }
                         if(t != null) clienteTarefas.Tarefas.Add(t);
@@ -44,7 +44,7 @@ namespace Infraestrutura
                     }
                 );
 
-                return dict.Values;
+                return new Relatorio { ListaClientesTarefas = dict.Values };
             }
         }
     }
