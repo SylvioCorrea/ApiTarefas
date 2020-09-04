@@ -21,15 +21,10 @@ namespace Aplicacao
             _tarefasRepositorio = tarefasRepositorio;
         }
         
-        public async Task<ClienteTarefasModel> GetTarefas(int idCliente)
+        public async Task<IEnumerable<TarefaModel>> GetTarefas(int idCliente)
         {
-            ClienteTarefas ct = await _tarefasRepositorio.SelectClienteTarefas(idCliente);
-            return new ClienteTarefasModel
-            {
-                Id = ct.Cliente.Id,
-                Nome = ct.Cliente.Nome,
-                Tarefas = ct.Tarefas
-            };
+            IEnumerable<Tarefa> listaTarefas = await _tarefasRepositorio.SelectTarefas(idCliente);
+            return listaTarefas.Select(t => new TarefaModel { Id = t.Id, IdCliente = t.Id_Cliente, Descricao = t.Descricao });
         }
 
         public async Task<int> CreateTarefa(TarefaModel tarefa)

@@ -35,36 +35,5 @@ namespace Infraestrutura
                 return await con.ExecuteAsync(sql, tarefa);
             }
         }
-
-        public async Task<ClienteTarefas> SelectClienteTarefas(int idCliente)
-        {
-            using (SqlConnection con = GetConnection())
-            {
-                string sql =
-                    @"select c.id, c.nome, t.id, t.id_cliente, t.descricao
-                    from clientes c left join tarefas t on c.id = t.id_cliente
-                    where c.id = @idCliente;";
-
-                Cliente cliente = null;
-                IEnumerable<Tarefa> tarefas = await con.QueryAsync<Cliente, Tarefa, Tarefa>(
-                    sql,
-                    (c, t) =>
-                    {
-                        if (cliente == null) cliente = c;
-                        return t;
-                    },
-                    new {idCliente}
-                );
-                return new ClienteTarefas
-                {
-                    Cliente = cliente,
-                    /*Se um objeto tarefa foi inicializado com id 0 é porque o
-                     retorno do banco foi nulo (Não há tarefa com id 0 no banco)*/
-                    Tarefas = tarefas.Where(t => t != null).ToList()
-                };
-            }
-        }
-
-        
     }
 }

@@ -11,7 +11,7 @@ namespace Aplicacao
 {
     public interface ITarefasServico
     {
-        Task<ClienteTarefasModel> GetTarefas(int idCliente);
+        Task<IEnumerable<TarefaModel>> GetTarefas(int idCliente);
         Task<int> CreateTarefa(TarefaModel tarefa);
     }
 }

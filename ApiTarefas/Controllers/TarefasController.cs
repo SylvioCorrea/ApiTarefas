@@ -38,7 +38,7 @@ namespace ApiTarefas.Controllers
         }
 
         [HttpGet("{id}/tarefas")]
-        public async Task<ClienteTarefasModel> GetTarefas(int id)
+        public async Task<IEnumerable<TarefaModel>> GetTarefas(int id)
         {
             return await _tarefasServico.GetTarefas(id);
         }
