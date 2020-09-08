@@ -8,6 +8,6 @@ Atende às seguintes requisições:
  - /clientes: POST - cadastra um cliente com a informação `nome` contida no corpo da requisição.
  - /clientes/\<id\>: GET - retorna o cliente cadastrado com a id.
  - /clientes/\<id\>/tarefas: GET - retorna lista de todas as tarefas cadastradas para o cliente.
- - /clientes/\<id\>/tarefas: POST - cadastra uma tarefa com a informação `descricao` contida no corpo da requisição.
+ - /clientes/\<id\>/tarefas: POST - cadastra uma tarefa com as informações `descricao` e `data_de_criacao` contidas no corpo da requisição. A data é opcional, podendo ser nula.
  - /clientes/relatorio: GET - retorna a lista de todos os clientes com suas respectivas tarefas.
- - /clientes/tarefas?busca=\<busca\>&maiorQue=\<mm-dd-aaaa\>: GET - retorna a lista de todas as tarefas. Disponibiliza a opção de buscar as tarefas que contenham determinada string `busca` na descrição e/ou foram criadas após uma data `maiorQue`. A data pode ser separada por `-` ou `/`, no formato mm/dd/aaaa.
+ - /clientes/tarefas?busca=\<busca\>&maiorQue=\<mm-dd-aaaa\>: GET - retorna a lista de todas as tarefas. Disponibiliza a opção de buscar as tarefas que contenham determinada string `busca` na descrição e/ou foram criadas após uma data `maiorQue`. A data pode ser separada por `-` ou `/`, no formato mm/dd/aaaa. (uma adição foi feita no script sql para que a tabela de tarefas passe a conter um campo data_de_criacao com valor default sendo a data atual)
