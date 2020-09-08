@@ -11,6 +11,7 @@ namespace Aplicacao.Modelos
         public int Id { get; set; }
         public int IdCliente { get; set; }
         public string Descricao { get; set; }
+        public DateTime? DataDeCriacao { get; set; }
 
     }
 }

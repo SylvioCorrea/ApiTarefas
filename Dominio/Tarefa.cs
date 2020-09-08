@@ -12,5 +12,7 @@ namespace Dominio
         public int Id_Cliente { get; set; }
 
         public string Descricao { get; set; }
+
+        public DateTime? Data_De_Criacao { get; set; }
     }
 }

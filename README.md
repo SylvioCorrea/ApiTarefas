@@ -10,3 +10,4 @@ Atende às seguintes requisições:
  - /clientes/\<id\>/tarefas: GET - retorna lista de todas as tarefas cadastradas para o cliente.
  - /clientes/\<id\>/tarefas: POST - cadastra uma tarefa com a informação `descricao` contida no corpo da requisição.
  - /clientes/relatorio: GET - retorna a lista de todos os clientes com suas respectivas tarefas.
+ - /clientes/tarefas?busca=\<busca\>&maiorQue=\<mm-dd-aaaa\>: GET - retorna a lista de todas as tarefas. Disponibiliza a opção de buscar as tarefas que contenham determinada string `busca` na descrição e/ou foram criadas após uma data `maiorQue`. A data pode ser separada por `-` ou `/`, no formato mm/dd/aaaa.

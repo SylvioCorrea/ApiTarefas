@@ -24,7 +24,25 @@ namespace Aplicacao
         public async Task<IEnumerable<TarefaModel>> GetTarefas(int idCliente)
         {
             IEnumerable<Tarefa> listaTarefas = await _tarefasRepositorio.SelectTarefas(idCliente);
-            return listaTarefas.Select(t => new TarefaModel { Id = t.Id, IdCliente = t.Id_Cliente, Descricao = t.Descricao });
+            return listaTarefas.Select(t => new TarefaModel
+            {
+                Id = t.Id,
+                IdCliente = t.Id_Cliente,
+                Descricao = t.Descricao,
+                DataDeCriacao = t.Data_De_Criacao
+            });
+        }
+
+        public async Task<IEnumerable<TarefaModel>> GetTarefas(string busca, DateTime? maiorQue)
+        {
+            IEnumerable<Tarefa> listaTarefas = await _tarefasRepositorio.SelectTarefas(busca, maiorQue);
+            return listaTarefas.Select(t => new TarefaModel
+            {
+                Id = t.Id,
+                IdCliente = t.Id_Cliente,
+                Descricao = t.Descricao,
+                DataDeCriacao = t.Data_De_Criacao
+            });
         }
 
         public async Task<int> CreateTarefa(TarefaModel tarefa)
@@ -32,8 +50,13 @@ namespace Aplicacao
             Cliente cliente = await _clientesRepositorio.SelectCliente(tarefa.IdCliente);
             if (cliente != null)
             {
-                return await _tarefasRepositorio.InsertTarefa(
-                    new Tarefa { Id = tarefa.Id, Id_Cliente = tarefa.IdCliente, Descricao = tarefa.Descricao });
+                return await _tarefasRepositorio.InsertTarefa(new Tarefa
+                { 
+                    Id = tarefa.Id, 
+                    Id_Cliente = tarefa.IdCliente, 
+                    Descricao = tarefa.Descricao,
+                    Data_De_Criacao = tarefa.DataDeCriacao
+                });
             }
             else return 0;
         }

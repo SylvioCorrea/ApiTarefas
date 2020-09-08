@@ -43,12 +43,20 @@ namespace ApiTarefas.Controllers
             return await _tarefasServico.GetTarefas(id);
         }
 
+        //Formato de entrada para data: mm-dd-aaaa
+        [HttpGet("tarefas")]
+        public async Task<IEnumerable<TarefaModel>> GetTarefas([FromQuery]string busca, DateTime? maiorQue)
+        {
+            return await _tarefasServico.GetTarefas(busca, maiorQue);
+        }
+
         [HttpPost]
         public async Task<int> PostCliente(ClienteModel cliente)
         {
             return await _clientesServico.CreateCliente(cliente);
         }
 
+        //formato de entrada para data no json: aaaa-mm-dd
         [HttpPost("{id}/tarefas")]
         public async Task<IActionResult> PostTarefa(int id, TarefaModel tarefa)
         {

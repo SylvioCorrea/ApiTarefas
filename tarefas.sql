@@ -28,3 +28,6 @@ insert into tarefas (id_cliente, descricao) values
 (4, 'Cortar o cabelo.'),
 (4, 'Pagar a conta.'),
 (5, 'Terminar o relatório.');
+
+alter table tarefas add
+data_de_criacao date not null default getdate() with values;

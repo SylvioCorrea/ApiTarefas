@@ -27,11 +27,32 @@ namespace Infraestrutura
             }
         }
 
+        public async Task<IEnumerable<Tarefa>> SelectTarefas(string busca, DateTime? maiorQue)
+        {
+            using (SqlConnection con = GetConnection())
+            {
+                string sql = "select * from tarefas;";
+                var lista = await con.QueryAsync<Tarefa>(sql);
+                if (busca != null) lista = lista.Where(t => t.Descricao.Contains(busca));
+                if (maiorQue != null) lista = lista.Where(t => t.Data_De_Criacao > maiorQue);
+                return lista;
+            }
+        }
+
         public async Task<int> InsertTarefa(Tarefa tarefa)
         {
             using (SqlConnection con = GetConnection())
             {
-                string sql = "insert into tarefas (id_cliente, descricao) values (@Id_Cliente, @Descricao);";
+                //Insere a data definida pelo usuário na entrada se houver.
+                //Senão o banco usa o próprio valor default getdate().
+                string colunaData = "";
+                string valorData = "";
+                if(tarefa.Data_De_Criacao != null)
+                {
+                    colunaData = ", data_de_criacao";
+                    valorData = ", @Data_De_Criacao";
+                }
+                string sql = $"insert into tarefas (id_cliente, descricao {colunaData}) values (@Id_Cliente, @Descricao {valorData});";
                 return await con.ExecuteAsync(sql, tarefa);
             }
         }
