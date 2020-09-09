@@ -10,7 +10,7 @@ namespace Infraestrutura
     public interface ITarefasRepositorio
     {
         Task<IEnumerable<Tarefa>> SelectTarefas(int idCliente);
-        Task<IEnumerable<Tarefa>> SelectTarefas(string busca, DateTime? maiorQue);
+        Task<IEnumerable<Tarefa>> SelectTarefas(string contem, DateTime? dataMaiorQue);
         Task<int> InsertTarefa(Tarefa tarefa);
     }
 }

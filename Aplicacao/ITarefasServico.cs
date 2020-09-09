@@ -12,7 +12,7 @@ namespace Aplicacao
     public interface ITarefasServico
     {
         Task<IEnumerable<TarefaModel>> GetTarefas(int idCliente);
-        Task<IEnumerable<TarefaModel>> GetTarefas(string busca, DateTime? maiorQue);
+        Task<IEnumerable<TarefaModel>> GetTarefas(string contem, DateTime? dataMaiorQue);
         Task<int> CreateTarefa(TarefaModel tarefa);
     }
 }

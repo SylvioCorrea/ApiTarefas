@@ -45,9 +45,9 @@ namespace ApiTarefas.Controllers
 
         //Formato de entrada para data: mm-dd-aaaa
         [HttpGet("tarefas")]
-        public async Task<IEnumerable<TarefaModel>> GetTarefas([FromQuery]string busca, DateTime? maiorQue)
+        public async Task<IEnumerable<TarefaModel>> GetTarefas([FromQuery]string contem, DateTime? dataMaiorQue)
         {
-            return await _tarefasServico.GetTarefas(busca, maiorQue);
+            return await _tarefasServico.GetTarefas(contem, dataMaiorQue);
         }
 
         [HttpPost]

@@ -33,9 +33,9 @@ namespace Aplicacao
             });
         }
 
-        public async Task<IEnumerable<TarefaModel>> GetTarefas(string busca, DateTime? maiorQue)
+        public async Task<IEnumerable<TarefaModel>> GetTarefas(string contem, DateTime? dataMaiorQue)
         {
-            IEnumerable<Tarefa> listaTarefas = await _tarefasRepositorio.SelectTarefas(busca, maiorQue);
+            IEnumerable<Tarefa> listaTarefas = await _tarefasRepositorio.SelectTarefas(contem, dataMaiorQue);
             return listaTarefas.Select(t => new TarefaModel
             {
                 Id = t.Id,

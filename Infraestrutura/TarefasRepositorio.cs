@@ -27,14 +27,14 @@ namespace Infraestrutura
             }
         }
 
-        public async Task<IEnumerable<Tarefa>> SelectTarefas(string busca, DateTime? maiorQue)
+        public async Task<IEnumerable<Tarefa>> SelectTarefas(string contem, DateTime? dataMaiorQue)
         {
             using (SqlConnection con = GetConnection())
             {
                 string sql = "select * from tarefas;";
                 var lista = await con.QueryAsync<Tarefa>(sql);
-                if (busca != null) lista = lista.Where(t => t.Descricao.Contains(busca));
-                if (maiorQue != null) lista = lista.Where(t => t.Data_De_Criacao > maiorQue);
+                if (contem != null) lista = lista.Where(t => t.Descricao.Contains(contem));
+                if (dataMaiorQue != null) lista = lista.Where(t => t.Data_De_Criacao > dataMaiorQue);
                 return lista;
             }
         }
