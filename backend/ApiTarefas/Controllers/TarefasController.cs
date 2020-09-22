@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Aplicacao;
 using Aplicacao.Modelos;
+using Microsoft.AspNetCore.Cors;
 
 namespace ApiTarefas.Controllers
 {

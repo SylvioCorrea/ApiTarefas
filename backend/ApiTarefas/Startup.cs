@@ -28,6 +28,16 @@ namespace ApiTarefas
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy(
+                name: "ThisIsntSafeAtAll",
+                builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                }
+            ));
+            
             services.AddControllers();
 
             services.AddSwaggerGen();
@@ -48,6 +58,8 @@ namespace ApiTarefas
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("ThisIsntSafeAtAll");
 
             app.UseSwagger();
 
