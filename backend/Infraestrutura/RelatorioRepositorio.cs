@@ -24,7 +24,7 @@ namespace Infraestrutura
             using (SqlConnection con = GetConnection())
             {
                 string sql =
-                    @"select c.id, c.nome, t.id, t.id_cliente, t.descricao
+                    @"select c.id, c.nome, t.id, t.id_cliente, t.descricao, t.data_de_criacao
                     from clientes c left join tarefas t on c.id = t.id_cliente;";
 
                 
