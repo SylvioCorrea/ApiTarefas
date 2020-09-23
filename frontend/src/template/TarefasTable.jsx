@@ -19,17 +19,14 @@ class TarefasTable extends Component {
   render() {
     return (
       <div>
-        <button type='button' className='btn btn-secondary'
-          onClick={this.props.initClientes}>
-          Voltar
-        </button>
+        <h4 className='pointer' onClick={this.props.initClientes}><i className='fa fa-chevron-left'></i>Voltar</h4>
         <PageHeader name='Tarefas' small='Tarefas do Cliente' />
-        <h2><i className='fa fa-user'></i> {this.props.cliente.nome}</h2>
+        <h1><i className='fa fa-user'></i> {this.props.cliente.nome}</h1>
         <table className='table'>
           <thead>
             <tr>
               <th>Descrição</th>
-              <th className='action-column'>Ações</th>
+              <th>Data De Criação</th>
             </tr>
           </thead>
           <tbody>

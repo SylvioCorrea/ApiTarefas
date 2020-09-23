@@ -11,5 +11,11 @@ namespace Aplicacao.Modelos
         public int Id { get; set; }
         public string Nome { get; set; }
 
+        public ClienteModel() { }
+        public ClienteModel(Cliente cliente)
+        {
+            Id = cliente.Id;
+            Nome = cliente.Nome;
+        }
     }
 }

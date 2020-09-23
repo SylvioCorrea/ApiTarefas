@@ -21,7 +21,7 @@ class Relatorio extends Component {
         <tr key={`${cliente.id}:${t.id}`}>
           <td>{t.descricao}</td>
           <td>{cliente.nome}</td>
-          <td>{t.data_De_Criacao}</td>
+          <td>{t.dataDeCriacao}</td>
         </tr>
       ))
     ))

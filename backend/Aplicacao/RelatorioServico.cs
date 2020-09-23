@@ -22,7 +22,7 @@ namespace Aplicacao
         public async Task<RelatorioModel> GetRelatorio()
         {
             var relatorio = await _relatorioRepositorio.SelectRelatorio();
-            return new RelatorioModel { ListaClientesTarefas = relatorio.ListaClientesTarefas };
+            return new RelatorioModel(relatorio);
         }
     }
 }

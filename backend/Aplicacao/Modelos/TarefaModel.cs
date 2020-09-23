@@ -13,5 +13,13 @@ namespace Aplicacao.Modelos
         public string Descricao { get; set; }
         public DateTime? DataDeCriacao { get; set; }
 
+        public TarefaModel() { }
+        public TarefaModel(Tarefa tarefa)
+        {
+            Id = tarefa.Id;
+            IdCliente = tarefa.Id_Cliente;
+            Descricao = tarefa.Descricao;
+            DataDeCriacao = tarefa.Data_De_Criacao;
+        }
     }
 }
