@@ -19,7 +19,9 @@ class TarefasTable extends Component {
   render() {
     return (
       <div>
-        <h4 className='pointer' onClick={this.props.initClientes}><i className='fa fa-chevron-left'></i>Voltar</h4>
+        <h4 className='pointer' onClick={this.props.initClientes}>
+          <i className='fa fa-chevron-left'/> Voltar
+        </h4>
         <PageHeader name='Tarefas' small='Tarefas do Cliente' />
         <h1><i className='fa fa-user'></i> {this.props.cliente.nome}</h1>
         <table className='table'>

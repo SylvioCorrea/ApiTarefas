@@ -1,8 +1,5 @@
-import { scryRenderedDOMComponentsWithClass } from 'react-dom/test-utils'
 import {
   getClientes,
-  getTarefas,
-  getCliente,
   getTarefasDoCliente,
   getRelatorio,
 } from './services/repository'

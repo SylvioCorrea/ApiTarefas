@@ -3,7 +3,7 @@ import React from 'react'
 export default props => (
   <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
     <a href="#/clientes" className="navbar-brand">
-      <i className="fa fa-calendar-check-o"></i> Clientes/Tarefas
+      Clientes/Tarefas
     </a>
     <button className="navbar-toggler" type="button" data-toggle="collapse"
       data-target="#collapse-menu" aria-controls="#collapse-menu"

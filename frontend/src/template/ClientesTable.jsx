@@ -13,7 +13,7 @@ class ClientesTable extends Component {
         <td>
           <button type='button' className='btn btn-primary'
             onClick={e => this.props.showTarefasDoCliente(c)}>
-            tarefas do cliente
+            <i className='fa fa-chevron-right' />
           </button>
         </td>
       </tr>
@@ -28,7 +28,7 @@ class ClientesTable extends Component {
           <thead>
             <tr>
               <th>Nome</th>
-              <th className='action-column'>Ações</th>
+              <th className='action-column'>Tarefas</th>
             </tr>
           </thead>
           <tbody>
