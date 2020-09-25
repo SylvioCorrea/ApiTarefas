@@ -1,5 +1,8 @@
 import {combineReducers} from 'redux'
+import {reducer as formReducer} from 'redux-form'
+
 import {ActionType} from './actionCreators'
+
 
 const INITIAL_STATE = {
   clientes: [],
@@ -21,6 +24,8 @@ function appStateReducer(state=INITIAL_STATE, action) {
       return {...state, selectedCliente: action.payload}
     case ActionType.GET_RELATORIO:
       return {...state, relatorio: action.payload}
+    case ActionType.POST_CLIENTE:
+      return state
     default:
       return state
   }
@@ -28,6 +33,7 @@ function appStateReducer(state=INITIAL_STATE, action) {
 
 const reducers = combineReducers({
   appState: appStateReducer,
+  form: formReducer,
 })
 
 export default reducers

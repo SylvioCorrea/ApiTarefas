@@ -5,6 +5,6 @@ import Routes from './Routes'
 export default props => (
   <div>
     <MenuNavBar />
-    <Routes />
+    <div className='container'><Routes /></div>
   </div>
 )

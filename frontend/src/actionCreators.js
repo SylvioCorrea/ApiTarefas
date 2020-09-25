@@ -1,6 +1,8 @@
 import {
   getClientes,
+  postCliente,
   getTarefasDoCliente,
+  postTarefaDoCliente,
   getRelatorio,
 } from './services/repository'
 
@@ -21,13 +23,32 @@ export function initClientes() {
   ]
 }
 
-export function getClientesAC() {
+export function getClientesAC(searchString) {
   return dispatch => {
     getClientes()
-      .then(resp => dispatch({
-        type: ActionType.GET_CLIENTES,
-        payload: resp.data
-      }))
+      .then(resp =>  {
+        let clientList = resp.data
+        //Filtra os clientes por nome se necessário
+        if(searchString) {
+          console.log('clientList', searchString, clientList)
+          clientList = clientList.filter(
+            c => c.nome.includes(searchString)
+          )
+          console.log('filtered', clientList)
+        }
+        dispatch({
+          type: ActionType.GET_CLIENTES,
+          payload: clientList
+        })
+      })
+  }
+}
+
+export function postClienteAC(values) {
+  console.log('form print', values)
+  return dispatch => {
+    postCliente(values)
+      .then(() => dispatch(initClientes()) )
   }
 }
 
@@ -49,6 +70,13 @@ function getTarefasDoClienteAC(tarefas) {
   return {
     type: ActionType.GET_TAREFAS_DO_CLIENTE,
     payload: tarefas
+  }
+}
+
+export function postTarefaDoClienteAC(tarefa) {
+  return dispatch => {
+    postTarefaDoCliente(tarefa)
+      .then(() => dispatch(initClientes()))
   }
 }
 

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import PageHeader from './PageHeader'
-import {initClientes} from '../actionCreators'
 import { bindActionCreators } from 'redux'
 
+import PageHeader from './PageHeader'
+import BaseForm from './BaseForm'
+import {initClientes, postTarefaDoClienteAC} from '../actionCreators'
 
 class TarefasTable extends Component {
   
@@ -16,6 +17,11 @@ class TarefasTable extends Component {
     ))
   }
 
+  onSubmit = tarefa => {
+    tarefa.idCliente = this.props.cliente.id
+    this.props.postTarefaDoClienteAC(tarefa)
+  }
+
   render() {
     return (
       <div>
@@ -23,6 +29,9 @@ class TarefasTable extends Component {
           <i className='fa fa-chevron-left'/> Voltar
         </h4>
         <PageHeader name='Tarefas' small='Tarefas do Cliente' />
+        <BaseForm onSubmit={this.onSubmit}
+          inputName='descricao'
+          placeholder='Insira uma tarefa'/>
         <h1><i className='fa fa-user'></i> {this.props.cliente.nome}</h1>
         <table className='table'>
           <thead>
@@ -41,14 +50,13 @@ class TarefasTable extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     tarefasDoCliente: state.appState.tarefasDoCliente,
     cliente: state.appState.selectedCliente
   }
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({initClientes}, dispatch)
+  return bindActionCreators({initClientes, postTarefaDoClienteAC}, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TarefasTable)
