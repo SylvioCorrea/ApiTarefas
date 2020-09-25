@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {showTarefasDoCliente, postClienteAC, getClientesAC} from '../actionCreators'
 import {bindActionCreators} from 'redux'
 import PageHeader from './PageHeader'
-import BaseForm from './BaseForm'
+import ClientesForm from './ClientesForm'
 
 class ClientesTable extends Component {
   renderRows() {
@@ -25,10 +25,7 @@ class ClientesTable extends Component {
     return (
       <div>
         <PageHeader name='Clientes' small='Lista de Clientes' />
-        <BaseForm onSubmit={this.props.postClienteAC}
-          onSearch={this.props.getClientesAC}
-          placeholder='Digite um nome'
-          inputName='nome'/>
+        <ClientesForm onSubmit={this.props.postClienteAC}/>
         <table className='table'>
           <thead>
             <tr>

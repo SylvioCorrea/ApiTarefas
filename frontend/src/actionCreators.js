@@ -6,6 +6,8 @@ import {
   getRelatorio,
 } from './services/repository'
 
+import {clearFields, destroy} from 'redux-form'
+
 export const ActionType = Object.freeze({
   GET_CLIENTES: 'GET_CLIENTES',
   GET_TAREFAS: 'GET_TAREFAS',
@@ -19,6 +21,7 @@ export const ActionType = Object.freeze({
 export function initClientes() {
   return [
     getClientesAC(),
+    destroy('ClientesForm'),
     selectTable('clientes'),
   ]
 }
