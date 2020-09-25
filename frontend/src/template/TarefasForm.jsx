@@ -13,6 +13,7 @@ let TarefasForm = props => (
       <Field name='descricao' component={FormInput}
         placeholder='Insira a tarefa' />
       <FormButtons
+        hasSubmit={true}
         onSearch={() => props.onSearch(props.cliente, props.inputString)}
         onClear={() => props.onClear(props.cliente)}/>
     </div>

@@ -1,3 +1,4 @@
+
 # Api Tarefas
 
 ## Backend
@@ -15,6 +16,11 @@ Atende às seguintes requisições:
  - /clientes/relatorio: GET - retorna a lista de todos os clientes com suas respectivas tarefas.
  - /clientes/tarefas?contem=\<contem\>&dataMaiorQue=\<mm-dd-aaaa\>: GET - retorna a lista de todas as tarefas. Disponibiliza a opção de buscar as tarefas que contenham determinada string `contem` na descrição e/ou foram criadas após uma data `dataMaiorQue`. A data pode ser separada por `-` ou `/`, no formato mm/dd/aaaa. (uma adição foi feita no script sql para que a tabela de tarefas passe a conter um campo data_de_criacao com valor default sendo a data atual)
 
- ## Frontend
+## Frontend
 
- Em construção.
+Frontend feito em react com redux, redux forms e bootstrap 4.
+
+Para iniciar, ir na pasta frontend e inserir na linha de comando `npm run start`
+
+A conexão com o backend é feita pelo fonte `repository.js` na pasta services.
+

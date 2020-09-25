@@ -103,14 +103,60 @@ export function postTarefaDoClienteAC(tarefa, cliente) {
   }
 }
 
-export function getRelatorioAC() {
+export function getRelatorioAC(searchString) {
   return dispatch => {
     getRelatorio()
-      .then(resp => dispatch({
-        type: ActionType.GET_RELATORIO,
-        payload: resp.data
-      }))
+      .then(resp => {
+        let relatorio = relatorioToTable(resp.data)
+        if(searchString) {
+          relatorio = relatorio.filter(
+            ({cliente, tarefa}) => cliente.nome.includes(searchString)
+              || tarefa.descricao.includes(searchString)
+          )
+        }
+        dispatch({
+          type: ActionType.GET_RELATORIO,
+          payload: relatorio
+        })
+      })
   }
+}
+
+/*O relatorio fornecido pelo backend é um objeto que contém somente
+uma lista de nome listaClientesTarefas. Nesta lista estão objetos
+compostos por um objeto cliente e uma lista com todas as tarefas
+daquele cliente:
+
+Relatorio: {
+  listaTarefasClientes: [
+    {cliente: {id, nome}, tarefas: [tarefa1, tarefa2...]},
+    {cliente: {id, nome}, tarefas: [tarefa1, tarefa2...]},
+    ...
+  ]
+}
+
+Esta função transforma recebe um objeto relatório e devolve uma lista
+de tarefas com seus respectivos clientes:
+
+[{cliente, tarefa}, {cliente, tarefa}, ...]
+
+Este processamento é conveniente tanto para a renderização da tabela
+de relatório desejada quanto a filtragem das tarefas por descrição e
+nome de cliente. */
+function relatorioToTable(relatorio) {
+  console.log(relatorio)
+  const table = relatorio.listaClientesTarefas.map(
+    ({cliente, tarefas}) => tarefas.map( tarefa => ({cliente, tarefa}))
+  /*Neste ponto o resultado é uma lista de listas (pois foi executado
+  um map dentro do outro). Com reduce e concat, as listas são
+  unificadas*/
+  ).reduce( (listaAnterior, listaAtual) => listaAnterior.concat(listaAtual), [])
+  console.log(table)
+  return table
+}
+
+export function clearRelatorioForm() {
+  return destroy('RelatorioForm')
 }
 
 function selectTable(tableName) {
