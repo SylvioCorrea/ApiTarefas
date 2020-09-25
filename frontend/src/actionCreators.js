@@ -6,7 +6,7 @@ import {
   getRelatorio,
 } from './services/repository'
 
-import {clearFields, destroy} from 'redux-form'
+import {destroy} from 'redux-form'
 
 export const ActionType = Object.freeze({
   GET_CLIENTES: 'GET_CLIENTES',
@@ -55,31 +55,51 @@ export function postClienteAC(values) {
   }
 }
 
-//Pega a lista de tarefas do backend e então troca a tabela a ser mostrada
 export function showTarefasDoCliente(cliente) {
+  return [
+    selectCliente(cliente),
+    getTarefasDoClienteAC(cliente),
+    selectTable('tarefasDoCliente')
+  ]
+}
+
+export function getTarefasDoClienteAC(cliente, searchString) {
   return dispatch => {
     getTarefasDoCliente(cliente.id)
-      .then(resp => dispatch(
-        getTarefasDoClienteAC(resp.data)
-      ))
-      .then( () => dispatch([
-        selectCliente(cliente),
-        selectTable('tarefasDoCliente')
-      ]))
+      .then(resp => {
+        let listaDeTarefas = resp.data
+        //Filtra as tarefas por descrição se necessário
+        if(searchString) {
+          listaDeTarefas = listaDeTarefas.filter(
+            t => t.descricao.includes(searchString)
+          )
+        }
+        dispatch({
+          type: ActionType.GET_TAREFAS_DO_CLIENTE,
+          payload: listaDeTarefas
+        })
+      })
   }
 }
 
-function getTarefasDoClienteAC(tarefas) {
-  return {
-    type: ActionType.GET_TAREFAS_DO_CLIENTE,
-    payload: tarefas
-  }
+export function clearTarefasForm(cliente) {
+  return [
+    destroy('TarefasForm'),
+    getTarefasDoClienteAC(cliente)
+  ]
 }
 
-export function postTarefaDoClienteAC(tarefa) {
-  return dispatch => {
+export function postTarefaDoClienteAC(tarefa, cliente) {
+  return (dispatch, getState) => {
+    //Insere a id do cliente que está selecionado na tarefa
+    //e então faz post da mesma
+    const cliente = getState().appState.selectedCliente
+    tarefa.idCliente = cliente.id
     postTarefaDoCliente(tarefa)
-      .then(() => dispatch(initClientes()))
+      .then(() => dispatch([
+        destroy('TarefasForm'),
+        getTarefasDoClienteAC(cliente)
+      ]))
   }
 }
 
@@ -99,6 +119,7 @@ function selectTable(tableName) {
     payload: tableName
   }
 }
+
 function selectCliente(cliente) {
   return {
     type: ActionType.SELECT_CLIENTE,

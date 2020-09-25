@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {showTarefasDoCliente, postClienteAC, getClientesAC} from '../actionCreators'
+import {showTarefasDoCliente, postClienteAC, getClientesAC, initClientes} from '../actionCreators'
 import {bindActionCreators} from 'redux'
 import PageHeader from './PageHeader'
 import ClientesForm from './ClientesForm'
@@ -25,7 +25,9 @@ class ClientesTable extends Component {
     return (
       <div>
         <PageHeader name='Clientes' small='Lista de Clientes' />
-        <ClientesForm onSubmit={this.props.postClienteAC}/>
+        <ClientesForm onSubmit={this.props.postClienteAC}
+          onSearch={this.props.getClientesAC}
+          onClear={this.props.initClientes}/>
         <table className='table'>
           <thead>
             <tr>
@@ -46,6 +48,6 @@ function mapStateToProps(state) {
   return {clientList: state.appState.clientes}
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({showTarefasDoCliente, postClienteAC, getClientesAC}, dispatch)
+  return bindActionCreators({showTarefasDoCliente, postClienteAC, getClientesAC, initClientes}, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ClientesTable)

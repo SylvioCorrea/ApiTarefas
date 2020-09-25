@@ -9,7 +9,8 @@ export default props => (
       onClick={props.onSearch}>
       <i className='fa fa-search' />
     </button>
-    <button type='button' className='btn btn-secondary mr-1' >
+    <button type='button' className='btn btn-secondary mr-1'
+      onClick={props.onClear}>
       <i className='fa fa-times' />
     </button>
   </div>

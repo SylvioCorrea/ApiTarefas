@@ -12,21 +12,23 @@ let ClientesForm = props => (
     <div className='form-row'>
       <Field name='nome' component={FormInput}
         placeholder='Insira o nome' />
-      <FormButtons />
+      <FormButtons
+        onSearch={() => props.onSearch(props.inputString)}
+        onClear={props.onClear}/>
     </div>
   </form>
 )
 
 ClientesForm = reduxForm({form: 'ClientesForm'})(ClientesForm)
 
-//const selector = formValueSelector('ClientesForm')
+const selector = formValueSelector('ClientesForm')
 
-// function mapStateToProps(state) {
-//   return {inputString: selector(state, 'nome')}
-// }
+function mapStateToProps(state) {
+  return {inputString: selector(state, 'nome')}
+}
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({getClientesAC}, dispatch)
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({getClientesAC}, dispatch)
+}
 
-export default ClientesForm
+export default connect(mapStateToProps, mapDispatchToProps)(ClientesForm)
