@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {showTarefasDoCliente, postClienteAC, getClientesAC, initClientes} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
+import {Link} from 'react-router-dom'
 import PageHeader from '../templates/PageHeader'
 import ClientesForm from './ClientesForm'
+import MenuNavBar from '../templates/MenuNavbar'
 
 class ClientesTable extends Component {
   renderRows() {
@@ -12,10 +14,11 @@ class ClientesTable extends Component {
       <tr key={c.id}>
         <td>{c.nome}</td>
         <td>
-          <button type='button' className='btn btn-primary'
-            onClick={e => this.props.showTarefasDoCliente(c)}>
-            <i className='fa fa-chevron-right' />
-          </button>
+          <Link to={`/clientes/${c.id}`}>
+            <button type='button' className='btn btn-primary'>
+              <i className='fa fa-chevron-right' />
+            </button>
+          </Link>
         </td>
       </tr>
     ))
@@ -24,6 +27,7 @@ class ClientesTable extends Component {
   render() {
     return (
       <div>
+        <MenuNavBar />
         <PageHeader name='Clientes' small='Lista de Clientes' />
         <ClientesForm onSubmit={this.props.postClienteAC}
           onSearch={this.props.getClientesAC}

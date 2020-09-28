@@ -4,6 +4,7 @@ import {
   getTarefasDoCliente,
   postTarefaDoCliente,
   getRelatorio,
+  getCliente
 } from '../services/repository'
 
 import {destroy} from 'redux-form'
@@ -42,6 +43,16 @@ export function getClientesAC(searchString) {
           payload: clientList
         })
       })
+  }
+}
+
+function getClienteAC(idCliente) {
+  return dispatch => {
+    getCliente(idCliente)
+      .then(resp => dispatch({
+        type: ActionType.GET_CLIENTE,
+        payload: resp.data
+      }))
   }
 }
 

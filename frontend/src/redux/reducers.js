@@ -10,12 +10,15 @@ const INITIAL_STATE = {
   relatorio: [],
   selectedTable: 'clientes',
   selectedCliente: {},
+  cliente: {}
 }
 
 function appStateReducer(state=INITIAL_STATE, action) {
   switch(action.type) {
     case ActionType.GET_CLIENTES:
       return {...state, clientes: action.payload}
+    case ActionType.GET_CLIENTE:
+      return {...state, cliente: action.payload}
     case ActionType.GET_TAREFAS_DO_CLIENTE:
       return {...state, tarefasDoCliente: action.payload}
     case ActionType.SELECT_TABLE:

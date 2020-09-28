@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {getRelatorioAC, clearRelatorioForm} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
 
+import MenuNavBar from '../templates/MenuNavbar'
 import PageHeader from '../templates/PageHeader'
 import RelatorioForm from './RelatorioForm'
 import {convertDate} from '../../utils'
@@ -27,6 +28,7 @@ class Relatorio extends Component {
   render() {
     return (
       <div>
+        <MenuNavBar />
         <PageHeader name='Relatorio' small='Todas as tarefas cadastradas' />
         <RelatorioForm
           hasSubmit={false}

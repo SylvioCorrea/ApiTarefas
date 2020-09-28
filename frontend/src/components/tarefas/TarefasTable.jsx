@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import MenuNavBar from '../templates/MenuNavbar'
 import PageHeader from '../templates/PageHeader'
 import {
   initClientes,
@@ -31,6 +32,7 @@ class TarefasTable extends Component {
   render() {
     return (
       <div>
+        <MenuNavBar />
         <h4 className='pointer' onClick={this.props.initClientes}>
           <i className='fa fa-chevron-left'/> Voltar
         </h4>
