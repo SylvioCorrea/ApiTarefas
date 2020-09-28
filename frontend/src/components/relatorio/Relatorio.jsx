@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {getRelatorioAC, clearRelatorioForm} from '../actionCreators'
+import {getRelatorioAC, clearRelatorioForm} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
-import PageHeader from './PageHeader'
+
+import PageHeader from '../templates/PageHeader'
 import RelatorioForm from './RelatorioForm'
+import {convertDate} from '../../utils'
 
 class Relatorio extends Component {
   constructor(props) {
@@ -17,7 +19,7 @@ class Relatorio extends Component {
       <tr key={tarefa.id}>
         <td>{tarefa.descricao}</td>
         <td>{cliente.nome}</td>
-        <td>{tarefa.dataDeCriacao}</td>
+        <td>{convertDate(tarefa.dataDeCriacao)}</td>
       </tr>
       ))
   }
@@ -28,7 +30,7 @@ class Relatorio extends Component {
         <PageHeader name='Relatorio' small='Todas as tarefas cadastradas' />
         <RelatorioForm
           hasSubmit={false}
-          onSearch={this.props.getRelatorioAC}
+          onSubmit={this.props.getRelatorioAC}
           onClear={this.props.clearRelatorioForm}/>
         <table className='table'>
           <thead>

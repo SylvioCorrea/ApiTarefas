@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import {bindActionCreators} from 'redux'
-import {getClientesAC} from '../actionCreators'
+import {getClientesAC} from '../redux/actionCreators'
 import { connect } from 'react-redux'
 
-import TarefasTable from './TarefasTable'
-import ClientesTable from './ClientesTable'
+import TarefasTable from './tarefas/TarefasTable'
+import ClientesTable from './clientes/ClientesTable'
 
 class Clientes extends Component {
   constructor(props) {

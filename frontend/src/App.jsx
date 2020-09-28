@@ -1,5 +1,5 @@
 import React from 'react'
-import MenuNavBar from './template/MenuNavbar'
+import MenuNavBar from './components/templates/MenuNavbar'
 import Routes from './Routes'
 
 export default props => (

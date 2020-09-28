@@ -4,7 +4,7 @@ import {
   getTarefasDoCliente,
   postTarefaDoCliente,
   getRelatorio,
-} from './services/repository'
+} from '../services/repository'
 
 import {destroy} from 'redux-form'
 
@@ -33,11 +33,9 @@ export function getClientesAC(searchString) {
         let clientList = resp.data
         //Filtra os clientes por nome se necessário
         if(searchString) {
-          console.log('clientList', searchString, clientList)
           clientList = clientList.filter(
             c => c.nome.includes(searchString)
           )
-          console.log('filtered', clientList)
         }
         dispatch({
           type: ActionType.GET_CLIENTES,
@@ -48,7 +46,6 @@ export function getClientesAC(searchString) {
 }
 
 export function postClienteAC(values) {
-  console.log('form print', values)
   return dispatch => {
     postCliente(values)
       .then(() => dispatch(initClientes()) )
@@ -103,15 +100,15 @@ export function postTarefaDoClienteAC(tarefa, cliente) {
   }
 }
 
-export function getRelatorioAC(searchString) {
+export function getRelatorioAC(values) {
   return dispatch => {
     getRelatorio()
       .then(resp => {
         let relatorio = relatorioToTable(resp.data)
-        if(searchString) {
+        if(values) {
           relatorio = relatorio.filter(
-            ({cliente, tarefa}) => cliente.nome.includes(searchString)
-              || tarefa.descricao.includes(searchString)
+            ({cliente, tarefa}) => cliente.nome.includes(values.searchString)
+              || tarefa.descricao.includes(values.searchString)
           )
         }
         dispatch({
@@ -144,19 +141,22 @@ Este processamento é conveniente tanto para a renderização da tabela
 de relatório desejada quanto a filtragem das tarefas por descrição e
 nome de cliente. */
 function relatorioToTable(relatorio) {
-  console.log(relatorio)
+  //console.log(relatorio)
   const table = relatorio.listaClientesTarefas.map(
     ({cliente, tarefas}) => tarefas.map( tarefa => ({cliente, tarefa}))
   /*Neste ponto o resultado é uma lista de listas (pois foi executado
   um map dentro do outro). Com reduce e concat, as listas são
   unificadas*/
   ).reduce( (listaAnterior, listaAtual) => listaAnterior.concat(listaAtual), [])
-  console.log(table)
+  //console.log(table)
   return table
 }
 
 export function clearRelatorioForm() {
-  return destroy('RelatorioForm')
+  return [
+    destroy('RelatorioForm'),
+    getRelatorioAC()
+  ]
 }
 
 function selectTable(tableName) {

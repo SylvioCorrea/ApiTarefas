@@ -3,17 +3,17 @@ import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import FormButtons from './FormButtons'
-import FormInput from './FormInput'
-import {getClientesAC} from '../actionCreators'
+import FormButtons from '../templates/FormButtons'
+import FormInput from '../templates/FormInput'
+import {getClientesAC} from '../../redux/actionCreators'
 
 let ClientesForm = props => (
-  <form onSubmit={props.handleSubmit} className='mb-2'>
+  <form onSubmit={props.handleSubmit} >
     <div className='form-row'>
       <Field name='nome' component={FormInput}
         placeholder='Insira o nome' />
       <FormButtons
-        hasSubmit={true}
+        hasPost={true}
         onSearch={() => props.onSearch(props.inputString)}
         onClear={props.onClear}/>
     </div>

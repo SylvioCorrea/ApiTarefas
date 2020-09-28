@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {showTarefasDoCliente, postClienteAC, getClientesAC, initClientes} from '../actionCreators'
+import {showTarefasDoCliente, postClienteAC, getClientesAC, initClientes} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
-import PageHeader from './PageHeader'
+import PageHeader from '../templates/PageHeader'
 import ClientesForm from './ClientesForm'
 
 class ClientesTable extends Component {

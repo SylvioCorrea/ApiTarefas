@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import PageHeader from './PageHeader'
+import PageHeader from '../templates/PageHeader'
 import {
   initClientes,
   postTarefaDoClienteAC,
   getTarefasDoClienteAC,
   clearTarefasForm
-} from '../actionCreators'
+} from '../../redux/actionCreators'
 import TarefasForm from './TarefasForm'
+import {convertDate} from '../../utils'
 
 class TarefasTable extends Component {
   
@@ -17,7 +18,7 @@ class TarefasTable extends Component {
     return this.props.tarefasDoCliente.map(t => (
       <tr key={t.id}>
         <td>{t.descricao}</td>
-        <td>{t.dataDeCriacao}</td>
+        <td>{convertDate(t.dataDeCriacao)}</td>
       </tr>
     ))
   }

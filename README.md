@@ -20,7 +20,7 @@ Atende às seguintes requisições:
 
 Frontend feito em react com redux, redux forms e bootstrap 4.
 
-Para iniciar, ir na pasta frontend e inserir na linha de comando `npm run start`
+Para iniciar, na pasta frontend, inserir na linha de comando `npm run start`
 
 A conexão com o backend é feita pelo fonte `repository.js` na pasta services.
 

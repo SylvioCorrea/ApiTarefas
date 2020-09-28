@@ -12,7 +12,7 @@ import 'bootstrap'
 import './custom.css'
 
 import App from './App';
-import reducers from './reducers'
+import reducers from './redux/reducers'
 
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__
   && window.__REDUX_DEVTOOLS_EXTENSION__()

@@ -23,7 +23,6 @@ export function getTarefasDoCliente(idCliente) {
 }
 
 export function postTarefaDoCliente(tarefa) {
-  console.log(tarefa)
   return axios.post(`${URL}/clientes/${tarefa.idCliente}/tarefas`, tarefa)
 }
 

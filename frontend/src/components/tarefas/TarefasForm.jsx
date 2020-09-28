@@ -3,17 +3,17 @@ import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import FormButtons from './FormButtons'
-import FormInput from './FormInput'
-import {showTarefasDoCliente} from '../actionCreators'
+import FormButtons from '../templates/FormButtons'
+import FormInput from '../templates/FormInput'
+import {showTarefasDoCliente} from '../../redux/actionCreators'
 
 let TarefasForm = props => (
-  <form onSubmit={props.handleSubmit} className='mb-2'>
+  <form onSubmit={props.handleSubmit} >
     <div className='form-row'>
       <Field name='descricao' component={FormInput}
         placeholder='Insira a tarefa' />
       <FormButtons
-        hasSubmit={true}
+        hasPost={true}
         onSearch={() => props.onSearch(props.cliente, props.inputString)}
         onClear={() => props.onClear(props.cliente)}/>
     </div>
