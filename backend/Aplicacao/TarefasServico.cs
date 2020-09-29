@@ -60,5 +60,10 @@ namespace Aplicacao
             }
             else return 0;
         }
+
+        public async Task<int> DeleteTarefa(int id)
+        {
+            return await _tarefasRepositorio.DeleteTarefa(id);
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace Aplicacao
         Task<ClienteModel> GetCliente(int id);
         Task<IEnumerable<ClienteModel>> GetClientes();
         Task<int> CreateCliente(ClienteModel cliente);
+        Task<int> DeleteCliente(int id);
     }
 }

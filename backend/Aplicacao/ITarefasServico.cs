@@ -14,5 +14,6 @@ namespace Aplicacao
         Task<IEnumerable<TarefaModel>> GetTarefas(int idCliente);
         Task<IEnumerable<TarefaModel>> GetTarefas(string contem, DateTime? dataMaiorQue);
         Task<int> CreateTarefa(TarefaModel tarefa);
+        Task<int> DeleteTarefa(int id);
     }
 }

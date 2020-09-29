@@ -24,6 +24,9 @@ class ClientesTable extends Component {
               <i className='fa fa-chevron-right' />
             </button>
           </Link>
+          <button type='button' className='btn btn-danger ml-1'>
+            <i className='fa fa-trash' />
+          </button>
         </td>
       </tr>
     ))

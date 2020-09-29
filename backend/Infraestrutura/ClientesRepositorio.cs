@@ -44,5 +44,14 @@ namespace Infraestrutura
                 return await con.ExecuteAsync(sql, cliente);
             }
         }
+
+        public async Task<int> DeleteCliente(int id)
+        {
+            using(SqlConnection con = GetConnection())
+            {
+                string sql = "delete from clientes where id = @id";
+                return await con.ExecuteAsync(sql, new { id });
+            }
+        }
     }
 }

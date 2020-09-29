@@ -1,10 +1,12 @@
 import {
   getClientes,
+  getCliente,
   postCliente,
+  deleteCliente,
   getTarefasDoCliente,
   postTarefaDoCliente,
+  deleteTarefa,
   getRelatorio,
-  getCliente
 } from '../services/repository'
 
 import {destroy} from 'redux-form'
@@ -57,6 +59,13 @@ export function postClienteAC(values) {
   return dispatch => {
     postCliente(values)
       .then(() => dispatch(initClientes()) )
+  }
+}
+
+export function deleteClienteAC(idCliente) {
+  return dispatch => {
+    deleteCliente(idCliente)
+      .then(resp => dispatch(getClientesAC()))
   }
 }
 

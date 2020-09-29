@@ -14,6 +14,10 @@ export function postCliente(cliente) {
   return axios.post(`${URL}/clientes`, cliente)
 }
 
+export function deleteCliente(id){
+  return axios.delete(`${URL}/clientes/${id}`)
+}
+
 export function getTarefas() {
   return axios.get(`${URL}/clientes/tarefas`)
 }
@@ -24,6 +28,10 @@ export function getTarefasDoCliente(idCliente) {
 
 export function postTarefaDoCliente(tarefa) {
   return axios.post(`${URL}/clientes/${tarefa.idCliente}/tarefas`, tarefa)
+}
+
+export function deleteTarefa(id) {
+  return axios.delete(`${URL}/clientes/tarefas/${id}`)
 }
 
 export function getRelatorio() {

@@ -26,6 +26,11 @@ namespace ApiTarefas.Controllers
             _relatorioServico = relatorioServico;
         }
 
+
+
+        //================================================================
+        //  Clientes
+        //================================================================
         [HttpGet]
         public async Task<IEnumerable<ClienteModel>> GetClientes()
         {
@@ -38,6 +43,23 @@ namespace ApiTarefas.Controllers
             return await _clientesServico.GetCliente(id);
         }
 
+        [HttpPost]
+        public async Task<int> PostCliente(ClienteModel cliente)
+        {
+            return await _clientesServico.CreateCliente(cliente);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<int> DeleteCliente(int id)
+        {
+            return await _clientesServico.DeleteCliente(id);
+        }
+
+
+
+        //================================================================
+        //  Tarefas
+        //================================================================
         [HttpGet("{id}/tarefas")]
         public async Task<IEnumerable<TarefaModel>> GetTarefas(int id)
         {
@@ -49,12 +71,6 @@ namespace ApiTarefas.Controllers
         public async Task<IEnumerable<TarefaModel>> GetTarefas([FromQuery]string contem, DateTime? dataMaiorQue)
         {
             return await _tarefasServico.GetTarefas(contem, dataMaiorQue);
-        }
-
-        [HttpPost]
-        public async Task<int> PostCliente(ClienteModel cliente)
-        {
-            return await _clientesServico.CreateCliente(cliente);
         }
 
         //formato de entrada para data no json: aaaa-mm-dd
@@ -73,6 +89,17 @@ namespace ApiTarefas.Controllers
             }
         }
 
+        [HttpDelete("tarefas/{id}")]
+        public async Task<int> DeleteTarefas(int id)
+        {
+            return await _tarefasServico.DeleteTarefa(id);
+        }
+
+
+
+        //================================================================
+        //  Relatório
+        //================================================================
         [HttpGet("relatorio")]
         public async Task<RelatorioModel> GetRelatorio()
         {

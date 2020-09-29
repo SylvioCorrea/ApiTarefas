@@ -56,5 +56,14 @@ namespace Infraestrutura
                 return await con.ExecuteAsync(sql, tarefa);
             }
         }
+
+        public async Task<int> DeleteTarefa(int id)
+        {
+            using(SqlConnection con = GetConnection())
+            {
+                string sql = "delete from tarefas where id = @id";
+                return await con.ExecuteAsync(sql, new { id });
+            }
+        }
     }
 }

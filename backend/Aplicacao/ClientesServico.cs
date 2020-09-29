@@ -37,5 +37,10 @@ namespace Aplicacao
         {
             return await _clientesRepositorio.InsertCliente(new Cliente { Id = cliente.Id, Nome = cliente.Nome });
         }
+
+        public async Task<int> DeleteCliente(int id)
+        {
+            return await _clientesRepositorio.DeleteCliente(id);
+        }
     }
 }

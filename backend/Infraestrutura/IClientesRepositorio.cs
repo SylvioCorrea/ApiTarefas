@@ -12,5 +12,6 @@ namespace Infraestrutura
         Task<IEnumerable<Cliente>> SelectClientes();
         Task<Cliente> SelectCliente(int id);
         Task<int> InsertCliente(Cliente cliente);
+        Task<int> DeleteCliente(int id);
     }
 }
