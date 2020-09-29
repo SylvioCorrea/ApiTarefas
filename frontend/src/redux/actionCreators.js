@@ -14,16 +14,13 @@ export const ActionType = Object.freeze({
   GET_TAREFAS: 'GET_TAREFAS',
   GET_CLIENTE: 'GET_CLIENTE',
   GET_TAREFAS_DO_CLIENTE: 'GET_TAREFAS_DO_CLIENTE',
-  GET_RELATORIO: 'GET_RELATORIO',
-  SELECT_TABLE: 'SELECT_TABLE',
-  SELECT_CLIENTE: 'SELECT_CLIENTE'
+  GET_RELATORIO: 'GET_RELATORIO'
 })
 
 export function initClientes() {
   return [
     getClientesAC(),
-    destroy('ClientesForm'),
-    selectTable('clientes'),
+    destroy('ClientesForm')
   ]
 }
 
@@ -46,7 +43,7 @@ export function getClientesAC(searchString) {
   }
 }
 
-function getClienteAC(idCliente) {
+export function getClienteAC(idCliente) {
   return dispatch => {
     getCliente(idCliente)
       .then(resp => dispatch({
@@ -63,17 +60,9 @@ export function postClienteAC(values) {
   }
 }
 
-export function showTarefasDoCliente(cliente) {
-  return [
-    selectCliente(cliente),
-    getTarefasDoClienteAC(cliente),
-    selectTable('tarefasDoCliente')
-  ]
-}
-
-export function getTarefasDoClienteAC(cliente, searchString) {
+export function getTarefasDoClienteAC(idCliente, searchString) {
   return dispatch => {
-    getTarefasDoCliente(cliente.id)
+    getTarefasDoCliente(idCliente)
       .then(resp => {
         let listaDeTarefas = resp.data
         //Filtra as tarefas por descrição se necessário
@@ -90,23 +79,23 @@ export function getTarefasDoClienteAC(cliente, searchString) {
   }
 }
 
-export function clearTarefasForm(cliente) {
+export function clearTarefasForm(idCliente) {
   return [
     destroy('TarefasForm'),
-    getTarefasDoClienteAC(cliente)
+    getTarefasDoClienteAC(idCliente)
   ]
 }
 
-export function postTarefaDoClienteAC(tarefa, cliente) {
+export function postTarefaDoClienteAC(tarefa, idCliente) {
   return (dispatch, getState) => {
     //Insere a id do cliente que está selecionado na tarefa
     //e então faz post da mesma
-    const cliente = getState().appState.selectedCliente
-    tarefa.idCliente = cliente.id
+    const idCliente = getState().appState.cliente.id
+    tarefa.idCliente = idCliente
     postTarefaDoCliente(tarefa)
       .then(() => dispatch([
         destroy('TarefasForm'),
-        getTarefasDoClienteAC(cliente)
+        getTarefasDoClienteAC(idCliente)
       ]))
   }
 }
@@ -143,7 +132,7 @@ Relatorio: {
   ]
 }
 
-Esta função transforma recebe um objeto relatório e devolve uma lista
+Esta função recebe um objeto relatório e devolve uma lista
 de tarefas com seus respectivos clientes:
 
 [{cliente, tarefa}, {cliente, tarefa}, ...]
@@ -168,18 +157,4 @@ export function clearRelatorioForm() {
     destroy('RelatorioForm'),
     getRelatorioAC()
   ]
-}
-
-function selectTable(tableName) {
-  return {
-    type: ActionType.SELECT_TABLE,
-    payload: tableName
-  }
-}
-
-function selectCliente(cliente) {
-  return {
-    type: ActionType.SELECT_CLIENTE,
-    payload: cliente
-  }
 }

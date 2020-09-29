@@ -5,16 +5,24 @@ import { bindActionCreators } from 'redux'
 import MenuNavBar from '../templates/MenuNavbar'
 import PageHeader from '../templates/PageHeader'
 import {
-  initClientes,
+  getClienteAC,
   postTarefaDoClienteAC,
   getTarefasDoClienteAC,
   clearTarefasForm
 } from '../../redux/actionCreators'
 import TarefasForm from './TarefasForm'
 import {convertDate} from '../../utils'
+import { Link } from 'react-router-dom'
 
-class TarefasTable extends Component {
-  
+class Tarefas extends Component {
+  constructor(props) {
+    super(props)
+    const idCliente = props.match.params.id
+    props.getClienteAC(idCliente)
+    props.getTarefasDoClienteAC(idCliente)
+  }
+
+
   renderRows() {
     return this.props.tarefasDoCliente.map(t => (
       <tr key={t.id}>
@@ -24,23 +32,25 @@ class TarefasTable extends Component {
     ))
   }
 
-  onSubmit = tarefa => {
-    tarefa.idCliente = this.props.cliente.id
-    this.props.postTarefaDoClienteAC(tarefa)
-  }
-
   render() {
     return (
       <div>
         <MenuNavBar />
-        <h4 className='pointer' onClick={this.props.initClientes}>
-          <i className='fa fa-chevron-left'/> Voltar
-        </h4>
+        
+        <Link to='/clientes'className='black-link'>
+          <h4 className='pointer mt-2'>
+            <i className='fa fa-chevron-left'/> Voltar
+          </h4>
+        </Link>
+        
         <PageHeader name='Tarefas' small='Tarefas do Cliente' />
+        
         <h1><i className='fa fa-user'></i> {this.props.cliente.nome}</h1>
+        
         <TarefasForm onSubmit={this.props.postTarefaDoClienteAC} 
           onSearch={this.props.getTarefasDoClienteAC}
           onClear={this.props.clearTarefasForm}/>
+        
         <table className='table'>
           <thead>
             <tr>
@@ -52,6 +62,7 @@ class TarefasTable extends Component {
             {this.renderRows()}
           </tbody>
         </table>
+      
       </div>
     )
   }
@@ -59,17 +70,18 @@ class TarefasTable extends Component {
 
 function mapStateToProps(state) {
   return {
-    tarefasDoCliente: state.appState.tarefasDoCliente,
-    cliente: state.appState.selectedCliente
+    cliente: state.appState.cliente,
+    tarefasDoCliente: state.appState.tarefasDoCliente
   }
 }
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    initClientes,
+    getClienteAC,
     postTarefaDoClienteAC,
     getTarefasDoClienteAC,
     clearTarefasForm
   }, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TarefasTable)
+export default connect(mapStateToProps, mapDispatchToProps)(Tarefas)

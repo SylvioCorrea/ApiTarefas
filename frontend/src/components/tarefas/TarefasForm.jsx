@@ -1,11 +1,9 @@
 import React from 'react'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 import FormButtons from '../templates/FormButtons'
 import FormInput from '../templates/FormInput'
-import {showTarefasDoCliente} from '../../redux/actionCreators'
 
 let TarefasForm = props => (
   <form onSubmit={props.handleSubmit} >
@@ -14,8 +12,8 @@ let TarefasForm = props => (
         placeholder='Insira a tarefa' />
       <FormButtons
         hasPost={true}
-        onSearch={() => props.onSearch(props.cliente, props.inputString)}
-        onClear={() => props.onClear(props.cliente)}/>
+        onSearch={() => props.onSearch(props.cliente.id, props.inputString)}
+        onClear={() => props.onClear(props.cliente.id)}/>
     </div>
   </form>
 )
@@ -27,12 +25,8 @@ const selector = formValueSelector('TarefasForm')
 function mapStateToProps(state) {
   return {
     inputString: selector(state, 'descricao'),
-    cliente: state.appState.selectedCliente
+    cliente: state.appState.cliente
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({showTarefasDoCliente}, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TarefasForm)
+export default connect(mapStateToProps)(TarefasForm)

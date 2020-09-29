@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {showTarefasDoCliente, postClienteAC, getClientesAC, initClientes} from '../../redux/actionCreators'
+import {postClienteAC, getClientesAC, initClientes} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
 import {Link} from 'react-router-dom'
 import PageHeader from '../templates/PageHeader'
@@ -8,6 +8,11 @@ import ClientesForm from './ClientesForm'
 import MenuNavBar from '../templates/MenuNavbar'
 
 class ClientesTable extends Component {
+  constructor(props) {
+    super(props)
+    props.getClientesAC()
+  }
+  
   renderRows() {
     const list = this.props.clientList || []
     return list.map( c => (
@@ -52,6 +57,6 @@ function mapStateToProps(state) {
   return {clientList: state.appState.clientes}
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({showTarefasDoCliente, postClienteAC, getClientesAC, initClientes}, dispatch)
+  return bindActionCreators({postClienteAC, getClientesAC, initClientes}, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ClientesTable)

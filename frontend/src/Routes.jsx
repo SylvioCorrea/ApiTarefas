@@ -1,17 +1,17 @@
 import React from 'react'
 import {Route, Switch} from 'react-router'
 import {BrowserRouter} from 'react-router-dom'
-import Clientes from './components/Clientes'
+import ClientesTable from './components/clientes/ClientesTable'
 import Relatorio from './components/relatorio/Relatorio'
-import Tarefas from './components/tarefas/Tarefas'
+import TarefasTable from './components/tarefas/TarefasTable'
 
 export default props => (
   <BrowserRouter>
     <Switch>
-      <Route exact path='/clientes' component={Clientes}/>
+      <Route exact path='/clientes' component={ClientesTable}/>
       <Route path='/relatorio' component={Relatorio}/>
-      <Route path='/clientes/:id' component={Tarefas} />
-      <Route path='/' component={Clientes}/>
+      <Route path='/clientes/:id' component={TarefasTable} />
+      <Route path='/' component={ClientesTable}/>
     </Switch>
   </BrowserRouter>
 )

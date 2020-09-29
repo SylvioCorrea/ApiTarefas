@@ -1,3 +1,7 @@
 .pointer {
   cursor: pointer;
 }
+
+.black-link {
+  color: #212529;
+}

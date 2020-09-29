@@ -3,6 +3,6 @@ import Routes from './Routes'
 
 export default props => (
   <div>
-    <div className='container'><Routes /></div>
+    <div className='container shadow'><Routes /></div>
   </div>
 )
