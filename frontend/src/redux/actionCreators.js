@@ -10,6 +10,9 @@ import {
 } from '../services/repository'
 
 import {destroy} from 'redux-form'
+import {formValueSelector} from 'redux-form'
+
+const selector = formValueSelector('TarefasForm')
 
 export const ActionType = Object.freeze({
   GET_CLIENTES: 'GET_CLIENTES',
@@ -69,8 +72,9 @@ export function deleteClienteAC(idCliente) {
   }
 }
 
-export function getTarefasDoClienteAC(idCliente, searchString) {
-  return dispatch => {
+export function getTarefasDoClienteAC(idCliente) {
+  return (dispatch, getState) => {
+    const searchString = selector(getState(), 'descricao')
     getTarefasDoCliente(idCliente)
       .then(resp => {
         let listaDeTarefas = resp.data
@@ -99,13 +103,20 @@ export function postTarefaDoClienteAC(tarefa, idCliente) {
   return (dispatch, getState) => {
     //Insere a id do cliente que está selecionado na tarefa
     //e então faz post da mesma
-    const idCliente = getState().appState.cliente.id
+    const idCliente = getState().tarefas.cliente.id
     tarefa.idCliente = idCliente
     postTarefaDoCliente(tarefa)
       .then(() => dispatch([
         destroy('TarefasForm'),
         getTarefasDoClienteAC(idCliente)
       ]))
+  }
+}
+
+export function deleteTarefaAC(id, idCliente) {
+  return dispatch => {
+    deleteTarefa(id)
+      .then(() => dispatch(getTarefasDoClienteAC(idCliente)))
   }
 }
 

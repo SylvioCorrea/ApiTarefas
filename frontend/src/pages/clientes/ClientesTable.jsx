@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {postClienteAC, getClientesAC, initClientes} from '../../redux/actionCreators'
+import {postClienteAC, getClientesAC, initClientes, deleteClienteAC} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
 import {Link} from 'react-router-dom'
-import PageHeader from '../templates/PageHeader'
+import PageHeader from '../../components/PageHeader'
 import ClientesForm from './ClientesForm'
-import MenuNavBar from '../templates/MenuNavbar'
+import MenuNavBar from '../../components/MenuNavbar'
 
 class ClientesTable extends Component {
   constructor(props) {
@@ -24,7 +24,8 @@ class ClientesTable extends Component {
               <i className='fa fa-chevron-right' />
             </button>
           </Link>
-          <button type='button' className='btn btn-danger ml-1'>
+          <button type='button' className='btn btn-danger ml-1'
+            onClick={e => this.props.deleteClienteAC(c.id)}>
             <i className='fa fa-trash' />
           </button>
         </td>
@@ -57,9 +58,9 @@ class ClientesTable extends Component {
 }
 
 function mapStateToProps(state) {
-  return {clientList: state.appState.clientes}
+  return {clientList: state.clientes}
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({postClienteAC, getClientesAC, initClientes}, dispatch)
+  return bindActionCreators({postClienteAC, getClientesAC, initClientes, deleteClienteAC}, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ClientesTable)

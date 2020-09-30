@@ -2,8 +2,8 @@ import React from 'react'
 import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import FormButtons from '../templates/FormButtons'
-import FormInput from '../templates/FormInput'
+import FormButtons from '../../components/FormButtons'
+import FormInput from '../../components/FormInput'
 
 let TarefasForm = props => (
   <form onSubmit={props.handleSubmit} >
@@ -12,7 +12,7 @@ let TarefasForm = props => (
         placeholder='Insira a tarefa' />
       <FormButtons
         hasPost={true}
-        onSearch={() => props.onSearch(props.cliente.id, props.inputString)}
+        onSearch={() => props.onSearch(props.cliente.id)}
         onClear={() => props.onClear(props.cliente.id)}/>
     </div>
   </form>
@@ -25,7 +25,7 @@ const selector = formValueSelector('TarefasForm')
 function mapStateToProps(state) {
   return {
     inputString: selector(state, 'descricao'),
-    cliente: state.appState.cliente
+    cliente: state.tarefas.cliente
   }
 }
 

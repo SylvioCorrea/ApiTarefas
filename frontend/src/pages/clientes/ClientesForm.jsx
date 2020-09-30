@@ -3,8 +3,8 @@ import { Field, formValueSelector, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import FormButtons from '../templates/FormButtons'
-import FormInput from '../templates/FormInput'
+import FormButtons from '../../components/FormButtons'
+import FormInput from '../../components/FormInput'
 import {getClientesAC} from '../../redux/actionCreators'
 
 let ClientesForm = props => (

@@ -3,8 +3,8 @@ import {connect} from 'react-redux'
 import {getRelatorioAC, clearRelatorioForm} from '../../redux/actionCreators'
 import {bindActionCreators} from 'redux'
 
-import MenuNavBar from '../templates/MenuNavbar'
-import PageHeader from '../templates/PageHeader'
+import MenuNavBar from '../../components/MenuNavbar'
+import PageHeader from '../../components/PageHeader'
 import RelatorioForm from './RelatorioForm'
 import {convertDate} from '../../utils'
 
@@ -52,7 +52,7 @@ class Relatorio extends Component {
 }
 
 function mapStateToProps(state) {
-  return {relatorio: state.appState.relatorio}
+  return {relatorio: state.relatorio}
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({getRelatorioAC, clearRelatorioForm}, dispatch)

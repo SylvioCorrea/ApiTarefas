@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import MenuNavBar from '../templates/MenuNavbar'
-import PageHeader from '../templates/PageHeader'
+import MenuNavBar from '../../components/MenuNavbar'
+import PageHeader from '../../components/PageHeader'
 import {
   getClienteAC,
   postTarefaDoClienteAC,
   getTarefasDoClienteAC,
-  clearTarefasForm
+  clearTarefasForm,
+  deleteTarefaAC
 } from '../../redux/actionCreators'
 import TarefasForm from './TarefasForm'
 import {convertDate} from '../../utils'
@@ -28,6 +29,12 @@ class Tarefas extends Component {
       <tr key={t.id}>
         <td>{t.descricao}</td>
         <td>{convertDate(t.dataDeCriacao)}</td>
+        <td>
+          <button type='button' className='btn btn-danger'
+            onClick={e => this.props.deleteTarefaAC(t.id, t.idCliente)}>
+            <i className='fa fa-trash'/>
+          </button>
+        </td>
       </tr>
     ))
   }
@@ -56,6 +63,7 @@ class Tarefas extends Component {
             <tr>
               <th>Descrição</th>
               <th>Data De Criação</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -70,8 +78,8 @@ class Tarefas extends Component {
 
 function mapStateToProps(state) {
   return {
-    cliente: state.appState.cliente,
-    tarefasDoCliente: state.appState.tarefasDoCliente
+    cliente: state.tarefas.cliente,
+    tarefasDoCliente: state.tarefas.tarefasDoCliente
   }
 }
 
@@ -80,7 +88,8 @@ function mapDispatchToProps(dispatch) {
     getClienteAC,
     postTarefaDoClienteAC,
     getTarefasDoClienteAC,
-    clearTarefasForm
+    clearTarefasForm,
+    deleteTarefaAC
   }, dispatch)
 }
 

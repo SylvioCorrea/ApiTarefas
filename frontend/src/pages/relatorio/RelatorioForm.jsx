@@ -1,8 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
-import FormButtons from '../templates/FormButtons'
-import FormInput from '../templates/FormInput'
+import FormButtons from '../../components/FormButtons'
+import FormInput from '../../components/FormInput'
 
 let RelatorioForm = props => (
   <form onSubmit={props.handleSubmit} >
