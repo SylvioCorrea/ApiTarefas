@@ -63,7 +63,7 @@ class Tarefas extends Component {
             <tr>
               <th>Descrição</th>
               <th>Data De Criação</th>
-              <th>Ações</th>
+              <th className='action_column'>Ações</th>
             </tr>
           </thead>
           <tbody>

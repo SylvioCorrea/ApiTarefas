@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default props => {
+const FormButtons = props => {
   
   let submitButton
   let searchButton
@@ -28,3 +28,5 @@ const FormButton = props => (
     <i className={`fa fa-${props.faIcon}`} />
   </button>
 )
+
+export default FormButtons

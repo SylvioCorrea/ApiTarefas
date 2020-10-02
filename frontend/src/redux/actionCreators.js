@@ -19,7 +19,9 @@ export const ActionType = Object.freeze({
   GET_TAREFAS: 'GET_TAREFAS',
   GET_CLIENTE: 'GET_CLIENTE',
   GET_TAREFAS_DO_CLIENTE: 'GET_TAREFAS_DO_CLIENTE',
-  GET_RELATORIO: 'GET_RELATORIO'
+  GET_RELATORIO: 'GET_RELATORIO',
+  SHOW_ALERT: 'SHOW_ALERT',
+  REMOVE_ALERT: 'REMOVE_ALERT'
 })
 
 export function initClientes() {
@@ -62,6 +64,9 @@ export function postClienteAC(values) {
   return dispatch => {
     postCliente(values)
       .then(() => dispatch(initClientes()) )
+      .catch( err => dispatch(
+        showAlert('Não foi possível registrar o cliente', err)
+      ))
   }
 }
 
@@ -69,6 +74,9 @@ export function deleteClienteAC(idCliente) {
   return dispatch => {
     deleteCliente(idCliente)
       .then(resp => dispatch(getClientesAC()))
+      .catch( err => dispatch(
+        showAlert('Não foi possível apagar o registro do cliente', err)
+      ))
   }
 }
 
@@ -110,6 +118,9 @@ export function postTarefaDoClienteAC(tarefa, idCliente) {
         destroy('TarefasForm'),
         getTarefasDoClienteAC(idCliente)
       ]))
+      .catch( err => dispatch(
+        showAlert('Não foi possível registrar a tarefa', err)
+      ))
   }
 }
 
@@ -117,6 +128,9 @@ export function deleteTarefaAC(id, idCliente) {
   return dispatch => {
     deleteTarefa(id)
       .then(() => dispatch(getTarefasDoClienteAC(idCliente)))
+      .catch( err => dispatch(
+        showAlert('Não foi possível apagar a tarefa', err)
+      ))
   }
 }
 
@@ -177,4 +191,18 @@ export function clearRelatorioForm() {
     destroy('RelatorioForm'),
     getRelatorioAC()
   ]
+}
+
+function showAlert(message, error) {
+  let errorText = error.request.responseText.split('\n', 1)[0]
+  return { 
+    type: ActionType.SHOW_ALERT,
+    payload: { message, errorText }
+  }
+}
+
+export function removeAlert() {
+  return {
+    type: ActionType.REMOVE_ALERT
+  }
 }

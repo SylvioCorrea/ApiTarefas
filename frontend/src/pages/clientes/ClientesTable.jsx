@@ -45,7 +45,7 @@ class ClientesTable extends Component {
           <thead>
             <tr>
               <th>Nome</th>
-              <th>Tarefas</th>
+              <th className='action-column'>Tarefas/Excluir</th>
             </tr>
           </thead>
           <tbody>
@@ -58,7 +58,7 @@ class ClientesTable extends Component {
 }
 
 function mapStateToProps(state) {
-  return {clientList: state.clientes}
+  return {clientList: state.clientes, visible: state.alerts}
 }
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({postClienteAC, getClientesAC, initClientes, deleteClienteAC}, dispatch)

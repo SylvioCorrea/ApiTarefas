@@ -28,7 +28,7 @@ function relatorioReducer(state=INITIAL_STATE_RELATORIO, action) {
 }
 
 const INITIAL_STATE_TAREFAS = {
-  cliente: [],
+  cliente: {},
   tarefasDoCliente: []
 }
 
@@ -45,10 +45,23 @@ function tarefasReducer(state=INITIAL_STATE_TAREFAS, action) {
   }
 }
 
+
+function alertsReducer(state=[], action) {
+  switch(action.type) {
+    case ActionType.SHOW_ALERT:
+      return [...state, action.payload]
+    case ActionType.REMOVE_ALERT:
+      return []
+    default:
+      return state
+  }
+}
+
 const reducers = combineReducers({
   clientes: clientesReducer,
   relatorio: relatorioReducer,
   tarefas: tarefasReducer,
+  alerts: alertsReducer,
   form: formReducer,
 })
 
